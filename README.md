@@ -1,6 +1,6 @@
 ---
 # Knowledge Graph
- -- *All credits go to user ![@thu_vu92](https://github.com/thu-vu92) and reddit*
+ -- *All credits go to user [@thu_vu92](https://github.com/thu-vu92) and reddit*
 
 This application is a simple streamlit based web interface to take in any summarized text data for a show,movie or any other media for which we have a synopsis.
 ---
