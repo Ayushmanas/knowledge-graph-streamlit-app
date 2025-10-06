@@ -1,0 +1,127 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 1200px;
+                 background-color: #222223;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"font": {"color": "white"}, "group": "Position", "id": "Hand Of The King", "label": "Hand Of The King", "shape": "dot", "title": "Position"}, {"font": {"color": "white"}, "group": "Person", "id": "Ned Stark", "label": "Ned Stark", "shape": "dot", "title": "Person"}, {"font": {"color": "white"}, "group": "Person", "id": "Jaime Lannister", "label": "Jaime Lannister", "shape": "dot", "title": "Person"}, {"font": {"color": "white"}, "group": "Person", "id": "Daenerys Targaryen", "label": "Daenerys Targaryen", "shape": "dot", "title": "Person"}, {"font": {"color": "white"}, "group": "Person", "id": "Joffrey Baratheon", "label": "Joffrey Baratheon", "shape": "dot", "title": "Person"}, {"font": {"color": "white"}, "group": "Creature", "id": "Undead Body", "label": "Undead Body", "shape": "dot", "title": "Creature"}, {"font": {"color": "white"}, "group": "Book", "id": "A Game Of Thrones", "label": "A Game Of Thrones", "shape": "dot", "title": "Book"}, {"font": {"color": "white"}, "group": "Person", "id": "Ser Jorah Mormont", "label": "Ser Jorah Mormont", "shape": "dot", "title": "Person"}, {"font": {"color": "white"}, "group": "Person", "id": "Robb Stark", "label": "Robb Stark", "shape": "dot", "title": "Person"}, {"font": {"color": "white"}, "group": "Person", "id": "Bran Stark", "label": "Bran Stark", "shape": "dot", "title": "Person"}, {"font": {"color": "white"}, "group": "Person", "id": "Tywin Lannister", "label": "Tywin Lannister", "shape": "dot", "title": "Person"}, {"font": {"color": "white"}, "group": "Creature", "id": "Newborn Dragons", "label": "Newborn Dragons", "shape": "dot", "title": "Creature"}, {"font": {"color": "white"}, "group": "Animal", "id": "Direwolf", "label": "Direwolf", "shape": "dot", "title": "Animal"}, {"font": {"color": "white"}, "group": "Location", "id": "Winterfell", "label": "Winterfell", "shape": "dot", "title": "Location"}, {"font": {"color": "white"}, "group": "Person", "id": "Catelyn Stark", "label": "Catelyn Stark", "shape": "dot", "title": "Person"}, {"font": {"color": "white"}, "group": "Person", "id": "Littlefinger", "label": "Littlefinger", "shape": "dot", "title": "Person"}, {"font": {"color": "white"}, "group": "Person", "id": "Jon Arryn", "label": "Jon Arryn", "shape": "dot", "title": "Person"}, {"font": {"color": "white"}, "group": "Object", "id": "Dragon Eggs", "label": "Dragon Eggs", "shape": "dot", "title": "Object"}, {"font": {"color": "white"}, "group": "Person", "id": "Sansa Stark", "label": "Sansa Stark", "shape": "dot", "title": "Person"}, {"font": {"color": "white"}, "group": "Structure", "id": "The Wall", "label": "The Wall", "shape": "dot", "title": "Structure"}, {"font": {"color": "white"}, "group": "People", "id": "Mountain Clansmen", "label": "Mountain Clansmen", "shape": "dot", "title": "People"}, {"font": {"color": "white"}, "group": "Location", "id": "King\u0027S Landing", "label": "King\u0027S Landing", "shape": "dot", "title": "Location"}, {"font": {"color": "white"}, "group": "Person", "id": "Jon Snow", "label": "Jon Snow", "shape": "dot", "title": "Person"}, {"font": {"color": "white"}, "group": "Organization", "id": "Night\u0027S Watch", "label": "Night\u0027S Watch", "shape": "dot", "title": "Organization"}, {"font": {"color": "white"}, "group": "Person", "id": "King Robert", "label": "King Robert", "shape": "dot", "title": "Person"}, {"font": {"color": "white"}, "group": "Family", "id": "Lannister Family", "label": "Lannister Family", "shape": "dot", "title": "Family"}, {"font": {"color": "white"}, "group": "Person", "id": "Arya Stark", "label": "Arya Stark", "shape": "dot", "title": "Person"}, {"font": {"color": "white"}, "group": "Location", "id": "The Eyrie", "label": "The Eyrie", "shape": "dot", "title": "Location"}, {"font": {"color": "white"}, "group": "Person", "id": "Tyrion Lannister", "label": "Tyrion Lannister", "shape": "dot", "title": "Person"}, {"font": {"color": "white"}, "group": "Person", "id": "Khal Drogo", "label": "Khal Drogo", "shape": "dot", "title": "Person"}, {"font": {"color": "white"}, "group": "Position", "id": "Protector Of The Realm", "label": "Protector Of The Realm", "shape": "dot", "title": "Position"}, {"font": {"color": "white"}, "group": "Continent", "id": "Westeros", "label": "Westeros", "shape": "dot", "title": "Continent"}, {"font": {"color": "white"}, "group": "Person", "id": "Lysa Arryn", "label": "Lysa Arryn", "shape": "dot", "title": "Person"}, {"font": {"color": "white"}, "group": "Person", "id": "Stannis Baratheon", "label": "Stannis Baratheon", "shape": "dot", "title": "Person"}, {"font": {"color": "white"}, "group": "Person", "id": "Viserys Targaryen", "label": "Viserys Targaryen", "shape": "dot", "title": "Person"}, {"font": {"color": "white"}, "group": "Person", "id": "Cersei Lannister", "label": "Cersei Lannister", "shape": "dot", "title": "Person"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "from": "A Game Of Thrones", "label": "takes_place_in", "to": "Westeros"}, {"arrows": "to", "from": "King Robert", "label": "visits", "to": "Winterfell"}, {"arrows": "to", "from": "King Robert", "label": "asks_to_be_hand_of_the_king", "to": "Ned Stark"}, {"arrows": "to", "from": "Jon Arryn", "label": "held", "to": "Hand Of The King"}, {"arrows": "to", "from": "Jon Arryn", "label": "killed_by", "to": "Lannister Family"}, {"arrows": "to", "from": "Catelyn Stark", "label": "informs_about_lannisters", "to": "Ned Stark"}, {"arrows": "to", "from": "Bran Stark", "label": "discovers_with_jaime_lannister", "to": "Cersei Lannister"}, {"arrows": "to", "from": "Jaime Lannister", "label": "pushes", "to": "Bran Stark"}, {"arrows": "to", "from": "Jon Snow", "label": "travels_to", "to": "The Wall"}, {"arrows": "to", "from": "Night\u0027S Watch", "label": "defends", "to": "The Wall"}, {"arrows": "to", "from": "Tyrion Lannister", "label": "visits", "to": "The Wall"}, {"arrows": "to", "from": "Daenerys Targaryen", "label": "marries", "to": "Khal Drogo"}, {"arrows": "to", "from": "Viserys Targaryen", "label": "killed_by", "to": "Khal Drogo"}, {"arrows": "to", "from": "Ser Jorah Mormont", "label": "advises", "to": "Daenerys Targaryen"}, {"arrows": "to", "from": "Daenerys Targaryen", "label": "receives", "to": "Dragon Eggs"}, {"arrows": "to", "from": "King Robert", "label": "father_of", "to": "Joffrey Baratheon"}, {"arrows": "to", "from": "Sansa Stark", "label": "in_love_with", "to": "Joffrey Baratheon"}, {"arrows": "to", "from": "Arya Stark", "label": "has", "to": "Direwolf"}, {"arrows": "to", "from": "Littlefinger", "label": "accuses", "to": "Tyrion Lannister"}, {"arrows": "to", "from": "Lysa Arryn", "label": "lives_in", "to": "The Eyrie"}, {"arrows": "to", "from": "Lysa Arryn", "label": "accuses", "to": "Tyrion Lannister"}, {"arrows": "to", "from": "Tyrion Lannister", "label": "convinces_to_join", "to": "Mountain Clansmen"}, {"arrows": "to", "from": "Ned Stark", "label": "named", "to": "Protector Of The Realm"}, {"arrows": "to", "from": "Ned Stark", "label": "supports_as_king", "to": "Stannis Baratheon"}, {"arrows": "to", "from": "Littlefinger", "label": "betrays", "to": "Ned Stark"}, {"arrows": "to", "from": "Tywin Lannister", "label": "wages_war_against", "to": "Robb Stark"}, {"arrows": "to", "from": "Robb Stark", "label": "captures", "to": "Jaime Lannister"}, {"arrows": "to", "from": "Joffrey Baratheon", "label": "crowned_in", "to": "King\u0027S Landing"}, {"arrows": "to", "from": "Undead Body", "label": "attacks", "to": "Jon Snow"}, {"arrows": "to", "from": "Ser Jorah Mormont", "label": "trusted_advisor", "to": "Daenerys Targaryen"}, {"arrows": "to", "from": "Daenerys Targaryen", "label": "mother_of", "to": "Newborn Dragons"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {"physics": {"forceAtlas2Based": {"gravitationalConstant": -100, "centralGravity": 0.01, "springLength": 200, "springConstant": 0.08}, "minVelocity": 0.75, "solver": "forceAtlas2Based"}};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
