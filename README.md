@@ -1,6 +1,6 @@
 ---
 # Knowledge Graph
- -- *All credits go to user @thu_vu92 and reddit*
+ -- *All credits go to user ![@thu_vu92](https://github.com/thu-vu92) and reddit*
 
 This application is a simple streamlit based web interface to take in any summarized text data for a show,movie or any other media for which we have a synopsis.
 ---
@@ -11,8 +11,10 @@ It extracts graph entities(entities & relationships) from text input using Lang 
 ![Screenshot-app-run-2](upload_text_opt_streamlit.png)
 
 ## Features
-- Creates a knowledge graph from inputed text file (file extension .txt).
-- Creates a knowledge graph from input text (in text area).
+- Dual input methods: text upload(.txt) or a direct text input
+- Interactive visualization for knowledge graph
+- Entity relationship extraction based on ChatGPT's gpt-4o model
+- Physics based layout for customizable graph display
 
 ## Installation
 You need to have Python>=3.8 installed, and preferable a code editor like VScode.
