@@ -8,7 +8,7 @@ It extracts graph entities(entities & relationships) from text input using Lang 
 
 ![Screenshot-app-run-1](input_text_opt_streamlit.png)
 
-![Screenshot-app-run-1](upload_text_opt_streamlit.png)
+![Screenshot-app-run-2](upload_text_opt_streamlit.png)
 
 ## Features
 - Creates a knowledge graph from inputed text file (file extension .txt).
