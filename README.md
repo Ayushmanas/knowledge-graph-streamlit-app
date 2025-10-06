@@ -1,11 +1,14 @@
 ---
 # Knowledge Graph
- -- *All credits go to user @thu_vu92*
+ -- *All credits go to user @thu_vu92 and reddit*
 
 This application is a simple streamlit based web interface to take in any summarized text data for a show,movie or any other media for which we have a synopsis.
-
+---
 It extracts graph entities(entities & relationships) from text input using Lang graph and OpenAi's gpt4-o, and uses Pyviz to create a visualized representation of knowledge graph, in order to summarize information through a DAG(Directed Acyclic Graph).
 
+![Screenshot-app-run-1](input_text_opt_streamlit.png)
+
+![Screenshot-app-run-1](upload_text_opt_streamlit.png)
 
 ## Features
 - Creates a knowledge graph from inputed text file (file extension .txt).
