@@ -1,6 +1,3 @@
-# streamlit-applications
-Any apps made using streamlit for AI and ML projects.
-
 ---
 # Knowledge Graph
  -- *All credits go to user @thu_vu92*
